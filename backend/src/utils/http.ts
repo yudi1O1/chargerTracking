@@ -9,7 +9,7 @@ export class HttpError extends Error {
   }
 }
 
-export type ApiMeta = Record<string, string | number | boolean | null>;
+type ApiMeta = Record<string, string | number | boolean | null>;
 
 export function sendSuccess<T>(res: Response, data: T, meta?: ApiMeta): void {
   res.json({
@@ -18,4 +18,3 @@ export function sendSuccess<T>(res: Response, data: T, meta?: ApiMeta): void {
     ...(meta ? { meta } : {}),
   });
 }
-

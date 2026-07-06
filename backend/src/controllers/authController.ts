@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import type { Request, Response } from "express";
 import { isDatabaseConnected } from "../config/database.js";
 import { UserModel } from "../models/User.js";
+import { demoUsers } from "../services/demoData.js";
 import { signTokenPair, verifyRefreshToken } from "../services/tokenService.js";
 import { loginSchema } from "../validators/common.js";
 import { HttpError, sendSuccess } from "../utils/http.js";
@@ -10,7 +11,14 @@ export async function login(req: Request, res: Response): Promise<void> {
   const payload = loginSchema.parse(req.body);
 
   if (!isDatabaseConnected()) {
-    throw new HttpError(503, "MongoDB connection is required for login");
+    const demoUser = demoUsers.find((user) => user.email === payload.email.toLowerCase() && user.status === "active");
+    if (!demoUser || payload.password !== "Password123!") {
+      throw new HttpError(401, "Invalid email or password");
+    }
+
+    const authUser = { id: demoUser.id, name: demoUser.name, email: demoUser.email, role: demoUser.role };
+    sendSuccess(res, { user: authUser, ...signTokenPair(authUser) });
+    return;
   }
 
   const user = await UserModel.findOne({ email: payload.email.toLowerCase(), status: "active" });

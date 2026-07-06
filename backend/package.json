@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc -p tsconfig.json",
+    "prestart": "npm run build",
     "start": "node dist/server.js",
     "lint": "eslint \"src/**/*.ts\"",
     "seed": "tsx src/seed.ts"
@@ -36,4 +37,3 @@
     "typescript": "^5.9.2"
   }
 }
-

@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { env } from "../config/env.js";
 import type { AuthUser } from "../types.js";
 
-export interface TokenPair {
+interface TokenPair {
   accessToken: string;
   refreshToken: string;
 }

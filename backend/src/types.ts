@@ -11,7 +11,7 @@ export interface AuthUser {
   role: UserRole;
 }
 
-export interface Coordinates {
+interface Coordinates {
   latitude: number;
   longitude: number;
 }
@@ -59,4 +59,3 @@ export interface NotificationDTO {
   read: boolean;
   createdAt: string;
 }
-
