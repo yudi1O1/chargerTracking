@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "services": {
+    "web": {
+      "root": ".",
+      "entrypoint": "src/server.ts"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": {
+        "type": "service",
+        "service": "web"
+      }
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+import "./types/express.js";
 import { resolveCorsOrigin } from "./config/cors.js";
 import { env } from "./config/env.js";
 import { errorHandler, notFound } from "./middleware/error.js";
