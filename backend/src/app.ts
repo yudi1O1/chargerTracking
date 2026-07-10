@@ -18,6 +18,9 @@ export function createApp() {
   app.use(cookieParser());
   app.use(morgan(env.NODE_ENV === "production" ? "combined" : "dev"));
 
+  app.get("/", (_req, res) => {
+    res.json({ success: true, data: { status: "ok", service: "evision-api" } });
+  });
   app.use("/api", apiRoutes);
   app.use(notFound);
   app.use(errorHandler);
